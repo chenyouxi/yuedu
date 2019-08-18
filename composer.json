@@ -1,0 +1,6 @@
+{
+    "require": {
+        "topthink/framework": "v5.1.37.1",
+        "tp5er/tp5-databackup": "dev-master"
+    }
+}

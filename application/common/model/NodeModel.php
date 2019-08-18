@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/6/18 * Time: 11:28 AM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class NodeModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_node';    protected $field = ["*"];}

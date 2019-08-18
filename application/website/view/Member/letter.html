@@ -1,0 +1,189 @@
+{include file="./public/header" }
+{include file="./public/navbar" }
+
+<style>
+
+    .ns-main {
+        overflow: hidden;
+        min-height:800px;
+    }
+
+    .member-main {
+        background: #fff;
+        overflow: hidden;
+        margin-top: 20px;
+        padding: 20px;
+
+    }
+
+    table{
+        width:100%;
+        table-layout:fixed;
+    }
+
+    table tr{
+        border-bottom: 1px solid #eee;
+    }
+
+    button.close {
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+    }
+
+    .hr-line-dashed {
+        border-top: 1px dashed #e7eaec;
+        color: #ffffff;
+        background-color: #ffffff;
+        height: 1px;
+        margin: 20px 0;
+    }
+
+    .span{
+        font-size: 12px;
+        font-weight: 500;
+        color: #A5A5A5;
+        line-height: 32px;
+    }
+
+    .col-yx-2{
+        flex: 0 0 20%;
+        max-width:20%;
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .modal-body::-webkit-scrollbar {
+        display:none;
+    }
+
+    .content_css img{
+        max-width: 100%;
+    }
+
+
+
+</style>
+<div class="ns-main w1200">
+    {include file="./public/member_menu" }
+
+    <div class="member-main">
+        <div class="main-top clearfix">
+            <button  data-toggle="modal" data-target="#letter-modal"   class="btn btn-primary btn-sm">发送站内信</button>
+            <span class="span pull-right" >>>站内信息列表，仅显示最近20条记录</span>
+        </div>
+
+        {volist name="list" id="vo"}
+        <div class=" clear" >
+
+            {if condition="$vo.smsType gt 0"}
+            <div class="col-yx-2 pull-left"></div>
+            <div class="col-sm-7 pull-left" >
+                <div class="alert  alert-danger content_css" role="alert" style="word-wrap:break-word">
+                    {$vo.content|raw}
+                </div>
+            </div>
+            <div class="col-yx-2 pull-left">
+                <strong> <i class="fa fa-hand-o-left "></i> 91AMZ </strong>
+                <br><br><span class="text-info">{$vo.addTime|date='Y-m-d H:i:s'}</span>
+            </div>
+            {else/}
+            <div class="col-yx-2 pull-left text-right">
+                <strong class="text-danger"> Me <i class="fa fa-hand-o-right"></i></strong>
+                <br><br><span class="text-info">{$vo.addTime|date='Y-m-d H:i:s'}</span>
+            </div>
+            <div class="col-sm-7 pull-left " >
+                {if condition="$vo.status lt 0"}
+                <span class="icon  not-read-icon"></span>
+                {else/}
+                <span class="icon read-icon"></span>
+                {/if}
+                <div class="alert  alert-warning content_css" role="alert" style="word-wrap:break-word">
+                    {$vo.content|raw}
+                </div>
+            </div>
+            <div class="col-yx-2 pull-left text-right"></div>
+            {/if}
+        </div>
+        <div class="hr-line-dashed"></div>
+        {/volist}
+    </div>
+
+
+    <div class="modal fade " id="letter-modal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 15%;left:0;right:0;bottom:0;" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="box-shadow: 2px 2px 10px rgba(0, 0, 0, .3);">
+                <div class="modal-header">
+                    <div style="font-weight:bold;font-size:17px;">向平台发送站内信</div>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="clear:both;">
+                    <form class="form-horizontal" id="passwordForm">
+                        <script id="container" name="content" type="text/plain"></script>
+                    </form>
+                </div>
+
+                <!-- 配置文件 -->
+                <script type="text/javascript" src="__STATIC__/UEditor/ueditor.config.js"></script>
+                <!-- 编辑器源码文件 -->
+                <script type="text/javascript" src="__STATIC__/UEditor/ueditor.all.js"></script>
+                <!-- 实例化编辑器 -->
+                <script type="text/javascript">
+                    var ue = UE.getEditor('container', {
+                        toolbars: [
+                            ['simpleupload']
+                        ],
+                        autoHeightEnabled: false,
+                        autoFloatEnabled: true,
+                        initialFrameHeight: 200
+                    });
+                </script>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-sm btn-white" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn-sm btn-primary" id="btnSubmit">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    //回复
+    $("#btnSubmit").click(function(){
+        var content = ue.getContent();
+        if(content.length<1){
+            layer.msg("内容不能为空！");
+            return false;
+        }
+        $.post("/website/memberLetter", {"content": content}, function (res) {
+            console.log(res);
+
+            if (res.status == 'error') {
+                layer.msg(res.msg);
+
+            } else {
+                layer.msg(res.msg);
+                setTimeout(function () {
+                    location.reload()
+                }, 2000);
+            }
+        },"json");
+    })
+    $(".close,.btn-white ").click(function(){
+        $(".letterBox").hide();
+        ue.setContent("");
+    });
+</script>
+
+{include file="./public/footer" }

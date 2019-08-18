@@ -1,0 +1,308 @@
+{include file="./public/header" }
+{include file="./public/navbar" }
+<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+<style>
+
+    .ns-main {
+        overflow: hidden;
+    }
+
+    .empty{
+        padding: 40px 0 90px;
+        color: #999;
+        text-align: center;
+        background-color: #fff;
+    }
+    #bindWx-modal .modal-body{
+        overflow-y:visible;
+    }
+
+    #bindWx-modal .modal-body::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<div class="ns-main w1200" >
+    {include file="./public/member_menu" }
+    <div class="member-main">
+        <div class="box-0">
+            <div class="ns-user">
+                <div class="ns-bg-color">
+                    <a class="avatar" href="/website/memberInfo">
+                        {empty name="userInfo.userFace" }
+                            <img src="__IMG__/default_headimg.png" />
+                        {else/}
+                            <img src="{$userInfo.userFace}"  />
+                        {/empty}
+                    </a>
+                    <span onclick="location.href='/website/memberInfo'" class="nick-name">{$userInfo.nickName}</span>
+
+                    <div class="level-name">
+                        <span class="ns-text-color">付费会员</span>
+                    </div>
+                </div>
+                <div style="text-align:center;line-height:30px;">
+                    {if !$userInfo.wxOpenid}
+                    <button data-toggle="modal" data-target="#bindWx-modal" style="border: none; color:white;background-color: #232331;"> 绑定微信 </button>
+                    {/if}
+                </div>
+            </div>
+            <div class="m-wallet">
+                <div class="mt"><h3>我的钱包</h3></div>
+                <ul>
+                    <li>
+                        <a href="/website/myPoint">
+                            <p class="num">{$userInfo.integral}</p>
+                            <p class="name">积分</p>
+                        </a>
+                        <p class="operate"><a href="/website/memberRecharge">我要充值</a></p>
+                    </li>
+                    <li>
+                        <!--<a href="/website/memberCoupon">
+                            <p class="num">0</p>
+                            <p class="name">优惠券</p>
+                        </a>
+                        <p class="operate"><a href="/">领券</a></p>-->
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class=" container p-0 mb-6 bg-white" >
+            <div class="mt"><h3>我的充值</h3></div>
+            {if condition = "$inviteData.total_count gt 0"}
+            <div class="table-responsive-xl u-datatable user-table-box bg-white">
+                <div id="hdtbl-1" style="z-index: 2; visibility: hidden; top: 0px; width: 0px;"></div>
+                <table class="js-freeze-header table loose-table">
+                <thead>
+                <tr class="bg-white text-secondary" style="line-height:22px;">
+
+                    <th scope="col" width="31%">
+                        <div class="bg-light">
+                            <a href="javascript:;" class="th  align-items-center text-secondary text-center">
+                                <div class="text-nowrap text-center">
+                                    支付宝交易号
+                                </div>
+                            </a>
+                        </div>
+                    </th>
+                    <th scope="col" width="10%">
+                        <div class="bg-light">
+                            <a href="javascript:;" class="th  align-items-center text-secondary text-center">
+                                <div class="text-nowrap text-center">
+                                    充值金额
+                                </div>
+                            </a>
+                        </div>
+                    </th>
+
+                    <th scope="col" width="18%">
+                        <div class="bg-light">
+                            <a href="javascript:;" class="th  align-items-center text-secondary text-center">
+                                <div class="text-nowrap text-center">
+                                    付款时间
+                                </div>
+                            </a>
+                        </div>
+                    </th>
+
+                    <th scope="col" width="18%">
+                        <div class="bg-light">
+                            <a href="javascript:;" class="th text-center align-items-center text-secondary">
+                                <div class="text-nowrap text-center">
+                                    使用时间
+                                </div>
+                            </a>
+                        </div>
+                    </th>
+
+                    <th scope="col" width="8%">
+                        <div class="bg-light">
+                            <a href="javascript:;" class="th  align-items-center text-secondary">
+                                <div class="text-nowrap text-center">
+                                    状态
+                                </div>
+                            </a>
+                        </div>
+                    </th>
+                    <th scope="col" width="15%">
+                        <div class="bg-light">
+                            <a href="javascript:;" class="th  align-items-center text-secondary">
+                                <div class="text-nowrap text-center">
+                                    备注
+                                </div>
+                            </a>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="orders" style="">
+                {volist name="inviteData.data" id="vo"}
+                <tr class="bg-white ">
+                    <td class="align-middle text-center">
+                        <div class="td text-nowrap">{$vo.tradeNo}</div>
+                    </td>
+                    <td class="align-middle text-center">
+                        <div class="td text-nowrap">
+                            ¥{$vo.tradePrice}
+                        </div>
+                    </td>
+                    <td class="align-middle text-center text-50AD55">
+                        <div class="td text-nowrap">
+                            {$vo.addTime|date="Y-m-d H:i:s"}
+                        </div>
+                    </td>
+                    <td class="align-middle text-center text-F1453D">
+                        <div class="td text-nowrap">
+                            {$vo.useTime|date="Y-m-d H:i:s"}
+                        </div>
+                    </td>
+                    <td class="align-middle text-center">
+                        <div class="td">
+                            {if condition="$vo.iStatus gt 0"}
+                            已使用
+                            {else/}
+                            未使用
+                            {/if}
+                        </div>
+                    </td>
+                    <td class="align-middle text-center">
+                        <div class="td">
+                            <div class="text-nowrap">
+                                {$vo.remark}
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+                {/volist}
+                </tbody>
+                <tfoot class="border-top">
+                <tr>
+                    <td colspan="10">
+                        <div class="p-4 user-more text-right">
+                            {if condition = "$inviteData.total_count gt 10"}
+                            <a href="/website/memberOrder" class="text-9FA3A8" id="getMore" >更多<span class="fa fa-angle-right"></span><span class="fa fa-angle-right"></span></a>
+                            {/if}
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+
+            </table>
+            </div>
+            {else/}
+            <div class="empty" >
+                <div class="icon-sprite cart-icon"></div>
+                <span>您暂时还没有充值记录！</span>
+            </div>
+            {/if}
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- 绑定微信提示框 -->
+<div class="modal fade"  id="bindWx-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="left:0;right:0;bottom:0;">
+    <div class="modal-dialog" style="width: 560px;text-align: center;margin: 12% auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel" style="margin-left: 220px">
+                    微信绑定
+                </h4>
+                <button style="margin-left: 1px" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="font-size: 13px;color: #505355">为了给您提供更好的服务，请绑定微信</div>
+                <div class="qr-code" style="text-align: center;height: 290px;display: flex; justify-content: center; align-items: center; " id="login_container">
+
+                    <img style="height:200px;width:200px;vertical-align: middle;" src="/public/static/img/wxloading.gif"/>
+
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center">
+                <button type="button" onClick="bind();" style="font-size: 11px" class="iconfont icon-reset btn btn-primary">刷新二维码</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#bindWx-modal').on('show.bs.modal', function (e) {
+        $.loading();
+        bind();
+    })
+    $('#bindWx-modal').on('hide.bs.modal', function (e) {
+        $.loaded();
+    })
+
+
+
+    // function bind(){
+    //     var state = "";
+    //     //生成登录二维码
+    //     $.get("/website/createState", {}, function (res) {
+    //         state = res;
+    //         var obj = new WxLogin
+    //         ({
+    //             id:"login_container",//div的id
+    //             appid: "{$loginConfig['wchat_login_config']['configValue']['APP_KEY']}",
+    //             scope: "snsapi_login",//写死
+    //             redirect_uri:encodeURI("{$loginConfig['wchat_login_config']['configValue']['CALLBACK']}") ,
+    //             state: state,
+    //             style: "black",//二维码黑白风格
+    //             href: "https://www.91amz.com/public/static/css/weixin-login.css"
+    //         });
+    //     },false);
+    // }
+
+    function bind(){
+        //生成二维码
+        $.get("/website/getQrCode", {}, function (data) {
+            if(data.status == 'success'){
+                var ticket = data.data.ticket;
+
+                //微信
+                $("#login_container img").attr('src',data.data.showQrCodeUrl);
+
+                setTimeout(function(){
+                    getQrState(ticket);
+                },3000);
+            }
+        },'json');
+    }
+
+    function getQrState(ticket){
+        $.post("/website/getQrState", {"ticket":ticket}, function (data) {
+            if(data.status == 'success'){
+                if(data.data.status == 2){
+                    $("#login_container img").attr('src','/public/static/img/sorry.gif');
+                } else if (data.data.status == 1){
+                    //提示绑定成功
+                    $("#login_container img").attr('src','/public/static/img/success.gif');
+
+                    //3秒后跳转到会员中心页面
+                    setTimeout(function(){
+                        window.location.href="/website/member";
+                    },3000);
+                }
+
+            } else {
+                //3s后再请求一次
+                setTimeout(function(){
+                    getQrState(ticket);
+                },3000);
+
+            }
+        },'json');
+    }
+
+
+</script>
+
+{include file="./public/footer" }

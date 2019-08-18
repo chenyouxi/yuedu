@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/6/11 * Time: 3:54 PM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class TopSellerListModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_top_seller_list';    protected $field = ["*"];}

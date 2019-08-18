@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/6/4 * Time: 1:44 PM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class InviteModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_invite';    protected $field = ["*"];}

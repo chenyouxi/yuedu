@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * UserModel: chenyouxi * Date: 2019/5/27 * Time: 5:06 PM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class UserModel extends BaseModel{    protected $pk = 'userId';    protected $table = 'amz_user';    protected $field = ["*"];}

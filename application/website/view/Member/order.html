@@ -1,0 +1,167 @@
+{include file="./public/header" }
+{include file="./public/navbar" }
+<style>
+    .ns-main {
+        overflow: hidden;
+        min-height:800px;
+    }
+    .member-main {
+        background: #fff;
+        overflow: hidden;
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    table{
+        width:100%;
+        table-layout:fixed;
+    }
+
+    table tr{
+        border-bottom: 1px solid #eee;
+    }
+</style>
+<div class="ns-main w1200">
+    {include file="./public/member_menu" }
+
+    <div class="member-main">
+        <div class="main-top clearfix">
+            我的充值记录
+        </div>
+        <table class="table table-borderless withdrawal-record">
+            <colgroup>
+                <col width="3%">
+                <col width="31%">
+                <col width="10%">
+                <col width="18%">
+                <col width="18%">
+                <col width="12%">
+                <col width="8%">
+            </colgroup>
+            <thead>
+            <tr id="thead" style="display:none;">
+                <th class="align-left">ID</th>
+                <th class="align-center">支付宝交易号</th>
+                <th class="align-center">充值金额</th>
+                <th class="align-center">付款时间</th>
+                <th class="align-center">使用时间</th>
+                <th class="align-center">备注</th>
+                <th class="align-center">状态</th>
+            </tr>
+            </thead>
+            <input type="hidden" name="pageindex" value="1" />
+            <div class="empty text-center orderNone" style="display:none;">
+                <div class="icon-sprite cart-icon"></div>
+                <span>您暂时还没有充值记录！</span>
+            </div>
+            <tbody class="js-page-content">
+
+
+            </tbody>
+        </table>
+    </div>
+    {include file="./public/common_page"}
+
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        GetDataList("{$page}");
+    })
+
+    function GetDataList(pageindex,isExport=0){
+
+        var pageindex = pageindex==0 ? $('#pageindex').val() : pageindex;
+
+        $("input[name='pageindex']").val(pageindex);
+
+
+        $.ajax({
+            type:"post",
+            url:"/website/memberOrder",
+            data:"page="+pageindex,
+            dataType:'json',
+            beforeSend:function(){
+                $.loading();
+            },
+            success:function(data){
+                $.loaded();
+
+                if(data.status == 'success'){
+
+                    var list = data.data.data,
+                        page_count = data.data.page_count,
+                        total_count = data.data.total_count;
+
+                    if( list.length == 0 ){
+                        $(".orderNone").show();
+                        return false;
+                    } else {
+                        $(".js-page-content").html("");
+                    }
+
+                    for(var i=0;i<list.length;i++){
+
+                        var listhtml='';
+
+                        for(var i=0;i<list.length;i++){
+                            var id = list[i].autoId,
+                                tradeNo = list[i].tradeNo,
+                                tradePrice = list[i].tradePrice,
+                                addTime = list[i].addTime,
+                                userTime = list[i].useTime,
+                                remark = list[i].remark,
+                                iStatus = list[i].iStatus;
+
+                            if(i%2 == 0){
+                                var bgcolor = 'bgcolor';
+
+                            } else {
+                                var bgcolor = '';
+                            }
+                            var id = i + 1;
+
+
+                            listhtml += '<tr class="'+bgcolor+'" >'
+                                + '<td class="align-center"><span class="span-keywords "> '+id+' </span></td>'
+                                + '<td class="align-center"><div class="text-nowrap"><span>'+tradeNo+'</span></div></td>'
+                                + '<td class="align-center"><div class="text-nowrap">¥'+tradePrice+'</div></td>'
+                                + '<td class="align-center"><div class="text-nowrap">'+addTime+'</div></td>'
+                                + '<td class="align-center"><div class="text-nowrap">'+userTime+'</div></td>'
+                                + '<td class="align-center "><div>'+remark+'</div></td>'
+                                + '<td class="align-center "><div>'+iStatus+'</div></td>'
+                                + '</tr>';
+
+
+                        }
+                        $("#thead").show();
+                        $(".js-page-content").html(listhtml);
+
+                    }
+                    var j = 1;
+                    for(i =1 ;i<total_count.toString().length;i++){
+                        var j = j+"0";
+                    }
+
+                    var searchCount = Math.floor(total_count/parseInt(j));
+                    $("#searchCount").html(searchCount*j+"+");
+
+                    $('#totalcount').text(total_count);//总条数
+                    $('#pagecount').text(page_count);//总页数
+                    $('#pageindex').val(pageindex);	//当前页数
+                    page_display(page_count,pageindex);
+                    $('#pagination').show();
+
+                } else {
+                    layer.msg(data.msg);
+
+                }
+
+
+            }
+        });
+    }
+
+</script>
+
+{include file="./public/footer" }

@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/6/11 * Time: 11:00 AM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class ArticleCategoryModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_article_category';    protected $field = ["*"];}

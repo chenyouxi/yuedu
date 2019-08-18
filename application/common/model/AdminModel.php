@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/7/17 * Time: 5:18 PM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class AdminModel extends BaseModel{    protected $pk = 'userId';    protected $table = 'amz_admin';    protected $field = ["*"];}

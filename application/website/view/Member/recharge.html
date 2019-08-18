@@ -1,0 +1,75 @@
+{include file="./public/header" }
+{include file="./public/navbar" }
+
+<div class="ns-main w1200">
+    {include file="./public/member_menu" }
+
+    {css rel="stylesheet" href="__CSS__/member_recharge.css" }
+
+    <div class="member-main">
+        <section class="clearfix">
+            <div class="pull-left w-65"  >
+                <div class="" style="">
+                    <p class="mb-2 col-sm-3">充值步骤：</p>
+                    <div class="mainbox" >
+                        <p class="dropdown-item-text" >1、积分充值规则：<button class="button" >1元 = {$rechargeValue}个积分</button></p>
+                        <p class="dropdown-item-text" >2、先通过支付宝转账到账号 ansaynet@126.com（郑俊同）转账</p>
+                        <p class="dropdown-item-text" >3、充值金额<span class="span">100元起</p>
+                        <p class="dropdown-item-text" >4、转账成功后1分钟，复制支付宝交易号到下面输入框，然后点击充值积分按钮</p>
+                        <p class="dropdown-item-text" >5、若遇数据延迟充值失败，请1分钟后再尝试获取，否则请联系在线客服，谢谢！</p>
+                    </div>
+                </div>
+                <div class=" mb-2 mt-4">
+                    <p class="col-sm-3 mb-2">支付宝交易号:</p>
+                    <div class="col-md-10 col-sm-10 list-inline-item">
+                        <input type="text" class="form-control rechargeinput" name="tradeId" placeholder="转账成功后1分钟，复制输入支付宝交易号(订单号)">
+                    </div>
+                    <div class="pull-right">
+                        <button class="getpoint " onClick="getPoint();" >充值积分</button>
+                    </div>
+                    <div  class="mt-1 looking"><i class="icon-qmark pull-left"></i>
+                        <a href="../website/articleView?aid=15&cid=1" target="_blank">订单号哪里看？？？</a>
+                    </div>
+                </div>
+                <div class=" mb-2 mt-4" style="border:1px solid #ccc;margin-left: 15px;">
+                    <p class="pointrule" >积分消费规则:</p>
+                    <div class="col-md-10 col-sm-10 list-inline-item" style="padding:15px 20px;">
+                        <a href="../website/articleView?aid=15&cid=1" target="_blank" class="btn btn-default">点击查看</a>
+                        积分政策会有变化，请以各项功能的<span class="price">实时价格</span>为准！
+                    </div>
+                </div>
+            </div>
+
+            <div class="pull-right w-30">
+                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=676826691&amp;site=qq&amp;menu=yes"><img src="__IMG__/give_me_money.jpg" alt="点击联系在线客服" /></a>
+            </div>
+
+        </section>
+
+    </div>
+
+
+</div>
+<script type="text/javascript">
+    function getPoint() {
+        var tradeId = $("input[name=tradeId]").val();
+        if(tradeId.length < 1 ){
+            layer.msg("请填写您的支付宝订单号");
+            return false;
+        }
+        $.post("/website/memberRecharge", {"tradeId": tradeId}, function (res) {
+
+            if (res.status == 'error') {
+                layer.msg(res.msg);
+
+            } else {
+                layer.msg(res.msg);
+                setTimeout(function () {
+                    window.location.href = "/website/myPoint";
+                }, 2000);
+            }
+        },"json");
+    }
+
+</script>
+{include file="./public/footer" }

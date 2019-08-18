@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/6/3 * Time: 4:05 PM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class LoginLogModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_login_log';    protected $field = ["*"];}

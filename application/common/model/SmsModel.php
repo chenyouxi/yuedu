@@ -1,0 +1,1 @@
+<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/6/1 * Time: 9:24 AM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class SmsModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_sms';    protected $field = ["*"];}
