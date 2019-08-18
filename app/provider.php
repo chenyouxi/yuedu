@@ -9,7 +9,6 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-<<<<<<< HEAD:app/provider.php
 use app\ExceptionHandle;
 use app\Request;
 
@@ -17,14 +16,4 @@ use app\Request;
 return [
     'think\Request'          => Request::class,
     'think\exception\Handle' => ExceptionHandle::class,
-=======
-// +----------------------------------------------------------------------
-// | Trace设置 开启调试模式后有效
-// +----------------------------------------------------------------------
-return [
-    // 内置Html 支持扩展
-    'type'    => 'Html',
-    // 读取的日志通道名
-    'channel' => '',
->>>>>>> 提交:config/trace.php
 ];
