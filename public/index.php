@@ -11,6 +11,7 @@
 
 // [ 应用入口文件 ]
 namespace think;
+<<<<<<< HEAD
 define('APP_PATH', __DIR__ . '/application/');
 define('REQUEST_METHOD', $_SERVER['REQUEST_METHOD']);
 define('IS_GET', (REQUEST_METHOD == 'GET' ? true : false));
@@ -22,3 +23,16 @@ require __DIR__ . '/../thinkphp/base.php';
 
 // 执行应用并响应
 Container::get('app')->run()->send();
+=======
+
+require __DIR__ . '/../vendor/autoload.php';
+
+// 执行HTTP应用并响应
+$http = (new App())->http;
+
+$response = $http->run();
+
+$response->send();
+
+$http->end($response);
+>>>>>>> 提交

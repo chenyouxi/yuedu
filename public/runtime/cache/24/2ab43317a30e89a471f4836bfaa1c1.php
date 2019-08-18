@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+a:4:{s:2:"id";a:7:{s:4:"name";s:2:"id";s:4:"type";s:12:"mediumint(8)";s:7:"notnull";b:0;s:7:"default";N;s:7:"primary";b:1;s:7:"autoinc";b:1;s:7:"comment";s:0:"";}s:4:"name";a:7:{s:4:"name";s:4:"name";s:4:"type";s:12:"varchar(100)";s:7:"notnull";b:0;s:7:"default";N;s:7:"primary";b:0;s:7:"autoinc";b:0;s:7:"comment";s:12:"标签名称";}s:3:"num";a:7:{s:4:"name";s:3:"num";s:4:"type";s:12:"mediumint(8)";s:7:"notnull";b:0;s:7:"default";s:1:"1";s:7:"primary";b:0;s:7:"autoinc";b:0;s:7:"comment";s:12:"标签数量";}s:9:"module_id";a:7:{s:4:"name";s:9:"module_id";s:4:"type";s:11:"smallint(3)";s:7:"notnull";b:0;s:7:"default";N;s:7:"primary";b:0;s:7:"autoinc";b:0;s:7:"comment";s:12:"所属模型";}}
