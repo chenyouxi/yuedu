@@ -35,18 +35,18 @@ class Index extends Base
     // 首页
     public function index()
     {
-        $view = [
-            'cate'        => null,
-            'system'      => $this->system, //系统信息
-            'public'      => $this->public, //公共目录
-            'title'       => $this->system['title'] ? $this->system['title'] : $this->system['name'], //seo信息
-            'keywords'    => $this->system['key'],   //seo信息
-            'description' => $this->system['des'],   //seo信息
-        ];
-
-        $template = $this->template.'index.html';
-        View::assign($view);
-        return View::fetch($template);
+//        $view = [
+//            'cate'        => null,
+//            'system'      => $this->system, //系统信息
+//            'public'      => $this->public, //公共目录
+//            'title'       => $this->system['title'] ? $this->system['title'] : $this->system['name'], //seo信息
+//            'keywords'    => $this->system['key'],   //seo信息
+//            'description' => $this->system['des'],   //seo信息
+//        ];
+//
+//        $template = $this->template.'index.html';
+//        View::assign($view);
+        return View::fetch();
     }
 
     //搜索
