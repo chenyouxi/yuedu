@@ -13,7 +13,8 @@
 namespace think;
 
 require __DIR__ . '/../vendor/autoload.php';
-
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT_PATH', dirname(dirname(__FILE__)));
 // 执行HTTP应用并响应
 $http = (new App())->http;
 
