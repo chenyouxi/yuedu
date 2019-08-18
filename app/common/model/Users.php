@@ -4,10 +4,10 @@
  * | 公共会员列表模型
  * +----------------------------------------------------------------------
  *                      .::::.
- *                    .::::::::.            | AUTHOR: siyu
- *                    :::::::::::           | EMAIL: 407593529@qq.com
- *                 ..:::::::::::'           | QQ: 407593529
- *             '::::::::::::'               | WECHAT: zhaoyingjie4125
+ *                    .::::::::.            | AUTHOR: chenyouxi
+ *                    :::::::::::           | EMAIL: 905100794@qq.com
+ *                 ..:::::::::::'           | QQ: 905100794
+ *             '::::::::::::'               | WECHAT: xi20130618
  *                .::::::::::               | DATETIME: 2019/03/04
  *           '::::::::::::::..
  *                ..::::::::::::.
@@ -47,6 +47,7 @@ class Users extends Base
                 'query'     => Request::get(),
                 'list_rows' => $pageSize,
             ]);
+
         foreach ($list as $k => $v){
             $v['type_name'] = $v->usersType->getData('name');
         }
