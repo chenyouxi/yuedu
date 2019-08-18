@@ -54,4 +54,17 @@ class Ad extends Base
         return $list;
     }
 
+    //接口获取列表
+    public static function apiGetList($where = array(), $pageSize, $order = ['sort', 'id' => 'desc'])
+    {
+        $list = self::where($where)
+            ->order($order)
+            ->paginate([
+                'query'     => Request::get(),
+                'list_rows' => $pageSize,
+            ]);
+
+        return $list;
+    }
+
 }

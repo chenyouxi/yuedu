@@ -65,4 +65,15 @@ class Users extends Base
         return $list;
     }
 
+    //获取单个用户详情
+    public static function getInfoForId( $id ){
+
+        $info = self::find($id);
+        $type_name = $info->usersType->getData('name');
+
+        $info['type_name'] = $type_name;
+
+        return $info;
+    }
+
 }

@@ -81,7 +81,7 @@ class UsersType extends Base
             // 验证失败 输出错误信息
             $this->error($result);
         } else {
-            $result = M::a  ddPost($data);
+            $result = M::addPost($data);
             if ($result['error']) {
                 $this->error($result['msg']);
             } else {
