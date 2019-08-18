@@ -1,1 +1,0 @@
-<?php/** * Created by PhpStorm. * User: chenyouxi * Date: 2019/6/4 * Time: 2:26 PM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class IntegralModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_integral';    protected $field = ["*"];}

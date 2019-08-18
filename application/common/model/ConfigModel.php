@@ -1,1 +1,0 @@
-<?php/** * Created by PhpStorm. * UserModel: chenyouxi * Date: 2019/5/27 * Time: 2:33 PM */namespace app\common\model;use app\common\model\BaseModel as BaseModel;class ConfigModel extends BaseModel{    protected $pk = 'autoId';    protected $table = 'amz_config';    protected $field = [        'configName',        'configValue',        'remark'    ];}
