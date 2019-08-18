@@ -1,4 +1,0 @@
-<?php
-//000000000000
- exit();?>
-a:4:{s:3:"uid";a:7:{s:4:"name";s:3:"uid";s:4:"type";s:21:"mediumint(8) unsigned";s:7:"notnull";b:0;s:7:"default";N;s:7:"primary";b:1;s:7:"autoinc";b:0;s:7:"comment";s:0:"";}s:8:"group_id";a:7:{s:4:"name";s:8:"group_id";s:4:"type";s:21:"mediumint(8) unsigned";s:7:"notnull";b:0;s:7:"default";N;s:7:"primary";b:1;s:7:"autoinc";b:0;s:7:"comment";s:0:"";}s:11:"create_time";a:7:{s:4:"name";s:11:"create_time";s:4:"type";s:7:"int(11)";s:7:"notnull";b:0;s:7:"default";s:1:"0";s:7:"primary";b:0;s:7:"autoinc";b:0;s:7:"comment";s:12:"添加时间";}s:11:"update_time";a:7:{s:4:"name";s:11:"update_time";s:4:"type";s:7:"int(11)";s:7:"notnull";b:0;s:7:"default";s:1:"0";s:7:"primary";b:0;s:7:"autoinc";b:0;s:7:"comment";s:12:"修改时间";}}
